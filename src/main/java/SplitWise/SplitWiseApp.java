@@ -41,10 +41,11 @@ public class SplitWiseApp {
                 collect(Collectors.toList());
         Transaction transaction = new Transaction(paidByUser, paidForUsers, expense);
         transaction.populateSplits();
-        addEntryInuserBalance(paidByUser, transaction);
+
+        addEntryInUserBalance(paidByUser, transaction);
     }
 
-    private void addEntryInuserBalance(User paidBy, Transaction transaction) {
+    private void addEntryInUserBalance(User paidBy, Transaction transaction) {
 
         for(var entry : transaction.getSplits().entrySet()){
             User paidFor = entry.getKey();

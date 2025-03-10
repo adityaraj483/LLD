@@ -105,7 +105,7 @@ public class Manager {
     }
 
     public void createTicket(Vehicle vehicle, Slot slot) {
-        Ticket ticket = new Ticket(vehicle, parkingLot,slot,  parkingLot.getFloor(slot.getFloorId()));
+        Ticket ticket = new Ticket(vehicle, parkingLot, slot, parkingLot.getFloor(slot.getFloorId()));
         slot.setAvailable(false);
         ticketRepository.addTicket(ticket);
         System.out.println("Parked vehicle. Ticket ID: "+ ticket.getId());

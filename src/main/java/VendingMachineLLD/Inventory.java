@@ -21,25 +21,25 @@ public class Inventory {
     }
 
     private void initializeInventory() {
-        int id = 101;
+        int selfId = 101;
         for(int i=0;i<size;i++){
-            ItemSelf itemSelf = new ItemSelf(id, null);
+            ItemSelf itemSelf = new ItemSelf(selfId, null);
             itemSelfes.add(itemSelf);
-            id++;
+            selfId++;
         }
     }
 
-    public boolean isSoldOut(int id){
+    public boolean isSoldOut(int selfId){
         for(ItemSelf itemSelf : itemSelfes){
-            if(itemSelf.getSelfId() == id){
+            if(itemSelf.getSelfId() == selfId){
                 return itemSelf.isSoldOut();
             }
         }
         return true;
     }
-    public void addItem(Item item, int id) throws Exception {
+    public void addItem(Item item, int selfId) throws Exception {
         for(ItemSelf itemSelf : itemSelfes){
-            if(itemSelf.getSelfId() == id){
+            if(itemSelf.getSelfId() == selfId){
 
                 if(itemSelf.isSoldOut()){
                     itemSelf.setItem(item);
@@ -50,9 +50,9 @@ public class Inventory {
         }
     }
 
-    public Item getItem(int id) throws Exception {
+    public Item getItem(int selfId) throws Exception {
         for(ItemSelf itemSelf : itemSelfes){
-            if(itemSelf.getSelfId() == id){
+            if(itemSelf.getSelfId() == selfId){
                 if(itemSelf.isSoldOut()){
                     throw new Exception("Item is out of Stock");
                 }else
@@ -61,9 +61,9 @@ public class Inventory {
         }
         return null;
     }
-    public void updateSoldOut(int id){
+    public void updateSoldOut(int selfId){
         for(ItemSelf itemSelf : itemSelfes){
-            if(itemSelf.getSelfId() == id){
+            if(itemSelf.getSelfId() == selfId){
                 itemSelf.setSoldOut(true);
                 return;
             }

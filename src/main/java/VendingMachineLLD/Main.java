@@ -1,28 +1,24 @@
 package VendingMachineLLD;
 
-import VendingMachineLLD.State.IState;
-
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        VendingMachine vendingMachine = new VendingMachine();
+
         try{
+            VendingMachine vendingMachine = new VendingMachine(12);
             fillUpInventory(vendingMachine);
             displayInventory(vendingMachine);
 
-            IState state = vendingMachine.getState();
+            vendingMachine.getState().ClickOnInsertCoinButton(vendingMachine);
 
-            state.ClickOnInsertCoinButton(vendingMachine);
-
-            state = vendingMachine.getState();
             vendingMachine.addCoin(10);
             vendingMachine.addCoin(20);
 
-            state.clickOnProductSelectionButton(vendingMachine);
-            state = vendingMachine.getState();
+            vendingMachine.getState().clickOnProductSelectionButton(vendingMachine);
 
-            state.chooseProduct(vendingMachine, 102);
+
+            vendingMachine.getState().chooseProduct(vendingMachine, 102);
 
             displayInventory(vendingMachine);
 
@@ -33,36 +29,36 @@ public class Main {
     }
 
     private static void fillUpInventory(VendingMachine vendingMachine){
-        List<ItemSelf> slots = vendingMachine.getInventory().getItemSelfes();
-        for (int i = 0; i < slots.size(); i++) {
+        List<ItemSelf> itemSelfs = vendingMachine.getInventory().getItemSelfes();
+        for (int i = 0; i < itemSelfs.size(); i++) {
             Item newItem = new Item();
-            if(i >=0 && i<3) {
+            if(i<3) {
                 newItem.setItemType(ItemType.Coke);
                 newItem.setCost(12);
-            }else if(i >=3 && i<5){
+            }else if(i<5){
                 newItem.setItemType(ItemType.Pepsi);
                 newItem.setCost(9);
-            }else if(i >=5 && i<7){
+            }else if(i<7){
                 newItem.setItemType(ItemType.Juice);
                 newItem.setCost(13);
-            }else if(i >=7 && i<10){
+            }else if(i<10){
                 newItem.setItemType(ItemType.Soda);
                 newItem.setCost(7);
             }
-            slots.get(i).setItem(newItem);
-            slots.get(i).setSoldOut(false);
+            itemSelfs.get(i).setItem(newItem);
+            itemSelfs.get(i).setSoldOut(false);
         }
     }
 
     private static void displayInventory(VendingMachine vendingMachine){
 
-        List<ItemSelf> slots = vendingMachine.getInventory().getItemSelfes();
-        for (int i = 0; i < slots.size(); i++) {
+        List<ItemSelf> itemSelfes = vendingMachine.getInventory().getItemSelfes();
+        for (ItemSelf itemSelfe : itemSelfes) {
 
-            System.out.println("CodeNumber: " + slots.get(i).getSelfId() +
-                    " Item: " + slots.get(i).getItem().getItemType().name() +
-                    " Price: " + slots.get(i).getItem().getCost() +
-                    " isAvailable: " + !slots.get(i).isSoldOut());
+            System.out.println("CodeNumber: " + itemSelfe.getSelfId() +
+                    " Item: " + itemSelfe.getItem().getItemType().name() +
+                    " Price: " + itemSelfe.getItem().getCost() +
+                    " isAvailable: " + !itemSelfe.isSoldOut());
         }
     }
 

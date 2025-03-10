@@ -58,13 +58,16 @@ public class Main {
             app.getUserBalance(items[1]);
     }
     private static void handleExpenseCommand(String[] items, SplitWiseApp app) throws Exception {
+
         String paidByUserId = items[1];
         Double amount = Double.parseDouble(items[2]);
         int noOfUsers = Integer.parseInt(items[3]);
         List<String> paidForUserIds = new ArrayList<>();
         paidForUserIds.addAll(Arrays.asList(items).subList(4, 4 + noOfUsers));
         String expenseType = items[4 + noOfUsers];
+
         Expense expense = app.createExpense(amount, getSplitStrategy(expenseType, noOfUsers, items));
+
         app.addTransaction(paidByUserId, paidForUserIds, expense);
     }
 

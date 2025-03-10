@@ -3,7 +3,7 @@ package VendingMachineLLD;
 public class Item {
     public int cost;
     ItemType itemType;
-    public Item(int id, int cost, ItemType itemType){
+    public Item(int cost, ItemType itemType){
         this.cost = cost;
         this.itemType = itemType;
     }

@@ -7,15 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class VendingMachine {
-    List<Item> items;
     IState state;
     List<Integer> coins;
     Inventory inventory;
-    VendingMachine(){
+    VendingMachine(int size ){
         state = new IdleState();
-        items = new ArrayList<>();
         coins = new ArrayList<>();
-        inventory = new Inventory(10);
+        inventory = new Inventory(size);
     }
     public void setState(IState newState){
         this.state = newState;
@@ -28,12 +26,9 @@ public class VendingMachine {
     public void setCoins(List<Integer> coins) {
         this.coins = coins;
     }
+
     public void addCoin(int coin){
         coins.add(coin);
-    }
-
-    public List<Item> getItems(){
-        return items;
     }
 
     public Item getItem(int productId) {
@@ -41,10 +36,6 @@ public class VendingMachine {
             if(itemSelf.getSelfId() == productId)
                 return itemSelf.getItem();
         return null;
-    }
-
-    public void setItems(List<Item> items) {
-        this.items = items;
     }
 
     public IState getState() {
